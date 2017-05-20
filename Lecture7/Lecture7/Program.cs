@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Console;
 
 namespace Lecture7
 {
@@ -16,73 +15,73 @@ namespace Lecture7
             {
                 try
                 {
-                    WriteLine("Main() try block reached.");
-                    WriteLine($"ThrowException(\"{eType}\") called.");
+                    Console.WriteLine("Main() try block reached.");
+                    Console.WriteLine($"ThrowException(\"{eType}\") called.");
                     ThrowException(eType);
-                    WriteLine("Main() try block continues.");
+                    Console.WriteLine("Main() try block continues.");
                 }
                 catch (System.IndexOutOfRangeException e) when (eType == "filter")
                 {
-                    WriteLine($"Main() FILTERED System.IndexOutOfRangeException catch block reached. Message:\n{e.Message}");
+                    Console.WriteLine($"Main() FILTERED System.IndexOutOfRangeException catch block reached. Message:\n{e.Message}");
                 }
                 catch (System.IndexOutOfRangeException e)
                 {
-                    WriteLine($"Main() System.IndexOutOfRangeException catch block reached. Message:\n{e.Message}");
+                    Console.WriteLine($"Main() System.IndexOutOfRangeException catch block reached. Message:\n{e.Message}");
                 }
                 catch
                 {
-                    WriteLine("Main() general catch block reached.");
+                    Console.WriteLine("Main() general catch block reached.");
                 }
                 finally
                 {
-                    WriteLine("Main() finally block reached.");
+                    Console.WriteLine("Main() finally block reached.");
                 }
-                WriteLine();
+                Console.WriteLine();
             }
-            ReadKey();
+            Console.ReadKey();
         }
         static void ThrowException(string exceptionType)
         {
-            WriteLine($"ThrowException(\"{exceptionType}\") reached.");
+            Console.WriteLine($"ThrowException(\"{exceptionType}\") reached.");
             switch (exceptionType)
             {
                 case "none":
-                    WriteLine("Not throwing an exception.");
+                    Console.WriteLine("Not throwing an exception.");
                     break;
                 case "simple":
-                    WriteLine("Throwing System.Exception.");
+                    Console.WriteLine("Throwing System.Exception.");
                     throw new System.Exception();
                 case "index":
-                    WriteLine("Throwing System.IndexOutOfRangeException.");
+                    Console.WriteLine("Throwing System.IndexOutOfRangeException.");
                     eTypes[5] = "error";
                     break;
                 case "nested index":
                     try
                     {
-                        WriteLine("ThrowException(\"nested index\") try block reached.");
-                        WriteLine("ThrowException(\"index\") called.");
+                        Console.WriteLine("ThrowException(\"nested index\") try block reached.");
+                        Console.WriteLine("ThrowException(\"index\") called.");
                         ThrowException("index");
                     }
                     catch
                     {
-                        WriteLine("ThrowException(\"nested index\") general catch block reached.");
+                        Console.WriteLine("ThrowException(\"nested index\") general catch block reached.");
                     }
                     finally
                     {
-                        WriteLine("ThrowException(\"nested index\") finally block reached.");
+                        Console.WriteLine("ThrowException(\"nested index\") finally block reached.");
                     }
                     break;
                 case "filter":
                     try
                     {
-                        WriteLine("ThrowException(\"filter\") " +
+                        Console.WriteLine("ThrowException(\"filter\") " +
                         "try block reached.");
-                        WriteLine("ThrowException(\"index\") called.");
+                        Console.WriteLine("ThrowException(\"index\") called.");
                         ThrowException("index");
                     }
                     catch
                     {
-                        WriteLine("ThrowException(\"filter\") general catch block reached.");
+                        Console.WriteLine("ThrowException(\"filter\") general catch block reached.");
                     }
                     break;
             }
