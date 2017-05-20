@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Generics
 {
-    public class GenList<T> : IEnumerable, ICloneable
+    public class GenList<T> : IEnumerable, IEnumerable<T>, ICloneable
     {
         class Node
         {
@@ -29,6 +29,7 @@ namespace Generics
         }
         private Node first;
         private Node last;
+        public int Count { get; private set; } = 0;
         public GenList()
         {
             first = null;
@@ -39,6 +40,7 @@ namespace Generics
             Node p = new Node(x);
             p.next = first;
             first = p;
+            Count++;
         }
         public void PushBack(T x) // добавяне в края
         {
@@ -54,6 +56,7 @@ namespace Generics
                 last.next = p;
                 last = p;
             }
+            Count++;
         }
         public void Disp()
         {
@@ -66,6 +69,12 @@ namespace Generics
             for (Node p = first; p != last; p = p.next)
                 yield return p.key;
         }
+        IEnumerator<T> IEnumerable<T>.GetEnumerator()
+        {
+            for (Node p = first; p != last; p = p.next)
+                yield return p.key;
+        }
+
         public object Clone()   //Дълбоко копиране (имплементиране на интерфейса ICloneable)
         {
             GenList<T> newList = new GenList<T>();
